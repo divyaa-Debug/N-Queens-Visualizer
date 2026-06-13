@@ -1,0 +1,77 @@
+
+import java.util.*;
+
+public class Main {
+    
+    private int size;
+    private List<int[]> solutions = new ArrayList<>();
+
+    
+    private boolean[] colsOccupied;
+    private boolean[] diag1Occupied;  
+    private boolean[] diag2Occupied;  
+
+    public Main(int n) {
+        this.size = n;
+        this.colsOccupied = new boolean[n];
+        this.diag1Occupied = new boolean[2 * n - 1];
+        this.diag2Occupied = new boolean[2 * n - 1];
+    }
+
+    public void solve() {
+        int[] currentBoard = new int[size]; 
+        backtrack(0, currentBoard);
+        printSolutions();
+    }
+
+    private void backtrack(int row, int[] board) {
+        
+        if (row == size) {
+            solutions.add(board.clone());
+            return;
+        }
+
+        for (int col = 0; col < size; col++) {
+             int d1 = row - col + (size - 1);
+            int d2 = row + col;
+             if (colsOccupied[col] || diag1Occupied[d1] || diag2Occupied[d2]) {
+                continue;  
+            }
+ 
+            board[row] = col;
+            colsOccupied[col] = diag1Occupied[d1] = diag2Occupied[d2] = true;
+
+            
+            backtrack(row + 1, board);
+
+          
+            colsOccupied[col] = diag1Occupied[d1] = diag2Occupied[d2] = false;
+        }
+    }
+
+    private void printSolutions() {
+        System.out.println("=== N-QUEENS BACKTRACKING ENGINE ===");
+        System.out.println("Board Size: " + size + "x" + size);
+        System.out.println("Total Valid Solutions Found: " + solutions.size() + "\n");
+
+        if (solutions.isEmpty()) return;
+
+           System.out.println("--- Visualizing Solution Setup #1 ---");
+        int[] clearSolution = solutions.get(0);
+        
+        for (int r = 0; r < size; r++) {
+            char[] rowView = new char[size];
+            Arrays.fill(rowView, '.');
+            rowView[clearSolution[r]] = 'Q';  
+            System.out.println(new String(rowView));
+        }
+    }
+
+    public static void main(String[] args) {
+         
+        Main solver = new Main(6);
+        solver.solve();
+    }
+}
+
+	 
