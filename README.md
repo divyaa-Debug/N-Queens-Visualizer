@@ -1,5 +1,5 @@
 N-Queens-Visualizer
-# 👑 N-Queens Solver & Visualizer
+# 👑 N-Queens Solver & Visualizer 
 
 A high-performance Java implementation and visualizer for the classic **N-Queens Puzzle** using an optimized recursive backtracking algorithm.
 
