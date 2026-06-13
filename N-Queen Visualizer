@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class Main {
+public class Main{
     
     private int size;
     private List<int[]> solutions = new ArrayList<>();
